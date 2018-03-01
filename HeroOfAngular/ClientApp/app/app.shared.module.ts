@@ -12,6 +12,13 @@ import { CounterComponent } from './components/counter/counter.component';
 
 import { HeroDetailComponent } from './components/app/hero-detail.component';
 
+
+import { BrowserModule } from '@angular/platform-browser';
+import { DashboardComponent } from './components/app/dashboard.component';
+import { HeroesComponent } from './components/app/heroes.component';
+import { HeroService } from './components/app/hero.service';
+import { AppRoutingModule } from './components/app/app-routing.module';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -19,20 +26,24 @@ import { HeroDetailComponent } from './components/app/hero-detail.component';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        HeroDetailComponent
+        HeroDetailComponent,
+
+        DashboardComponent,
+        HeroesComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
-        RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
-        ])
-    ]
+
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule
+    ],
+    providers: [
+        HeroService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModuleShared {
 }
