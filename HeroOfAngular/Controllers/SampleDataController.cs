@@ -26,6 +26,7 @@ namespace HeroOfAngular.Controllers
             });
         }
 
+
         public class WeatherForecast
         {
             public string DateFormatted { get; set; }
@@ -40,5 +41,38 @@ namespace HeroOfAngular.Controllers
                 }
             }
         }
+
+
+        //--------Hero-----------//
+        public class Hero
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+        }
+
+
+        private static Hero[] HeroAry = new[]{
+            new Hero(){ id= 11, name = "Mr. Nice" },
+            new Hero(){ id= 12, name = "Narco" },
+            new Hero(){ id= 13, name = "Bombasto" },
+            new Hero(){ id= 14, name = "Celeritas" },
+            new Hero(){ id= 15, name = "Magneta" },
+            new Hero(){ id= 16, name = "RubberMan" },
+            new Hero(){ id= 17, name = "Dynama" },
+            new Hero(){ id= 18, name = "Dr IQ" },
+            new Hero(){ id= 19, name = "Magma" },
+            new Hero(){ id= 20, name = "Tornado Y" },
+
+        };
+
+        [HttpGet("[action]")]
+        public IEnumerable<Hero> Heros()
+        {
+            var rng = new Random();
+            return HeroAry;
+        }
+
+
+
     }
 }
