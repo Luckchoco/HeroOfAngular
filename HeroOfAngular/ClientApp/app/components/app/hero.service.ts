@@ -1,11 +1,35 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+//import { HEROES } from './mock-heroes';
+import { Http } from '@angular/http';
+
 
 @Injectable()
 export class HeroService {
+    //public heroApi: Hero[]=[];
+    constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) {//需要加上private，其他function才能用   
+    }
+
+
     getHeroes(): Promise<Hero[]> {
-        return Promise.resolve(HEROES);
+        console.log("getHeroesss:start:" + this.baseUrl);
+        //return Promise.resolve(HEROES);
+        //return Promise.resolve(this.heroApi);
+        //return this.http.get(this.baseUrl + 'api/SampleData/Heros').subscribe(result => {
+        //    this.heroApi = result.json() as Hero[];
+
+        //    console.log("constructor:result - " + JSON.stringify(result.json()));
+        //    console.log("constructor:end");
+        //}, error => console.error(error));
+
+
+     
+        return new Promise(resolve => {
+            this.http.get(this.baseUrl + 'api/SampleData/Heros').subscribe(result => {
+                resolve(result.json() as Hero[])//有resolve表示執行完成
+           }, error => console.error(error));
+        });
+    
     }
 
     getHeroesSlowly(): Promise<Hero[]> {
